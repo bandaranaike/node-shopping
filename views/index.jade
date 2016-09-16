@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    div(class='container')
+        h1= title
+        p Welcome to #{title}
+        div(class='items')
+            each item in data
+                div(class='item')
+                    h3=item.name
+                    p=item.description
+                    div(class='price')
+                        span=currency + item.price
+                        div(class='cart-items')
+                            input(type='text', name='count', value='1')
+                            input(type='button', class='item-select', name='add', id='#{item.id}', value='Add to cart')
