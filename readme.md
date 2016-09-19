@@ -17,4 +17,5 @@ This application is designed for a shopping cart.
 5. Installed MySQL `npm install mysql`
 6. Installed gulp `npm install gulp`
 7. Installed twitter bootstrap `npm install bootstrap@3`
-8. Added Database file 
+8. Added Database file
+9. Installed express session `npm install express-session`
