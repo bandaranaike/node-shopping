@@ -3,45 +3,51 @@ var router = express.Router();
 var mysql = require('mysql');
 var session = require('express-session');
 
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'eranda',
-    password: 'password'
-});
+var conn = require('./connection');
+var connection = conn.connection();
 
-connection.connect();
+var data;
 
-var data, cart = 5;
-
-connection.query('SELECT * FROM node_shopping.products', function (err, rows, fields) {
+connection.query('SELECT * FROM node_shopping.products', function (err, rows) {
     if (err) throw err;
     data = rows;
 });
 
-connection.end();
+router.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
 
-
-var app = express();
-
-
-app.use(function (req, res, next) {
-    cart = req.session.myCart;
-    if (!cart) {
-        cart = req.session.myCart = {};
-    }
-    cart['prod'] = (cart['prod'] || 0) + 1;
-    next();
-
-});
-
-/* GET home page. */
-router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Node Shopping', data: data, currency: 'Rs. ', cart: cart});
-});
+var cart_data = {};
 
 router.post('/', function (req, res) {
-    console.log(req);
-    res.send('Came');
+    var cart = req.session.cart;
+    if (!cart) {
+        cart = req.session.cart = {}
+    }
+
+    var id = req.body.id;
+    var count = parseInt(req.body.count, 10);
+
+    cart[id] = (cart[id] || 0) + count;
+
+    var ids = Object.keys(cart);
+
+    if (ids.length > 0) {
+        connection.query('SELECT * FROM node_shopping.products WHERE id IN (' + ids + ')', function (err, rows) {
+            if (err) throw err;
+            cart_data = rows;
+            res.render('index', {title: 'Node Shopping', data: data, currency: 'Rs. ', cart_data: rows, cart: cart});
+        });
+    } else {
+        res.render('index', {title: 'Node Shopping', data: data, currency: 'Rs. ', cart_data: cart_data});
+    }
 });
+
+router.get('/', function (req, res) {
+    res.render('index', {title: 'Node Shopping', data: data, currency: 'Rs. ', cart_data: cart_data});
+});
+
 
 module.exports = router;

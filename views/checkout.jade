@@ -1,3 +1,6 @@
+//
+   Created by eranda on 9/20/16.
+
 extends layout
 
 block content
@@ -17,16 +20,3 @@ block content
                     a(class='button', href='/clear') Clear
                     a(class='button', href='/checkout') Checkout
 
-
-        div(class='items')
-            each item in data
-                div(class='item')
-                    h3=item.name
-                    p=item.description
-                    div(class='price')
-                        span=currency + item.price
-                        div(class='form-items')
-                            form(method='post')
-                                input(type='text', name='count', value='1')
-                                input(type='hidden', name='id', value='#{item.id}')
-                                input(type='submit', class='item-select', name='add', id='#{item.id}', value='Add to cart')
