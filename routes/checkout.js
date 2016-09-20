@@ -21,15 +21,16 @@ router.use(session({
 
 
 router.get('/', function (req, res) {
-
     var cart = req.session.cart;
-    var ids = Object.keys(cart);
-
-    connection.query('SELECT * FROM node_shopping.products WHERE id IN (' + ids + ')', function (err, rows) {
-        if (err) throw err;
-        cart_data = rows;
-        res.render('index', {title: 'Node Shopping', data: data, currency: 'Rs. ', cart_data: rows, cart: cart});
-    });
-    res.render('index', {title: 'Checkout', currency: 'Rs. ', cart_data: cart_data});
+    if (cart) {
+        var ids = Object.keys(cart);
+        connection.query('SELECT * FROM node_shopping.products WHERE id IN (' + ids + ')', function (err, rows) {
+            if (err) throw err;
+            cart_data = rows;
+            res.render('checkout', {title: 'Shopping Cart', data: data, currency: 'Rs. ', cart_data: rows, cart: cart});
+        });
+    } else {
+        res.render('checkout', {title: 'Checkout', cart_data: 0});
+    }
 });
 module.exports = router;

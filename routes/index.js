@@ -19,10 +19,10 @@ router.use(session({
     saveUninitialized: true
 }));
 
-var cart_data = {};
+var cart_data, cart = {};
 
 router.post('/', function (req, res) {
-    var cart = req.session.cart;
+    cart = req.session.cart;
     if (!cart) {
         cart = req.session.cart = {}
     }
@@ -46,7 +46,17 @@ router.post('/', function (req, res) {
 });
 
 router.get('/', function (req, res) {
-    res.render('index', {title: 'Node Shopping', data: data, currency: 'Rs. ', cart_data: cart_data});
+    res.render('index', {title: 'Node Shopping', data: data, currency: 'Rs. ', cart_data: cart_data, cart: cart});
+});
+
+router.get('/pay', function (req, res) {
+    cart_data = req.session.cart = {};
+    res.render('message', {title: 'Payment Success', message: "Payment was successful and your order being processed!"});
+});
+
+router.get('/clear', function (req, res) {
+    cart_data = req.session.cart = {};
+    res.render('message', {title: 'Shopping Cart Cleared!', message: "Shopping Cart has been flushed!"});
 });
 
 

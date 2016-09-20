@@ -6,7 +6,7 @@ extends layout
 block content
     div(class='container')
         h1= title
-        p Welcome to #{title}
+        a(href='/') Home
 
         if(cart_data.length > 0)
             div(class='cart')
@@ -15,8 +15,11 @@ block content
                     div(class='cart-item')
                         span=cart_item.name
                         span=cart[cart_item.id]
-                        span=Math.round((cart[cart_item.id] * cart_item.price) * 100) / 100
+                        - var value=(Math.round((cart[cart_item.id] * cart_item.price) * 100) / 100)
+                        - total = (total || 0) + value;
+                        span=currency + value
                 div(class='cart-bottom')
-                    a(class='button', href='/clear') Clear
-                    a(class='button', href='/checkout') Checkout
-
+                    b Total : #{currency + total} &nbsp;
+                    a(class='button', href='/pay') Pay
+        else
+            h3 Shopping Cart is empty
