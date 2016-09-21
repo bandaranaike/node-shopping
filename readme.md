@@ -20,7 +20,7 @@ This application is designed for a shopping cart.
 8. Navigate to the `https://localhost:3000` using the browser.
 
 ###Known issues
-* Not tested properly. It may have some memory lakes.
+* Not tested properly. It may have some errors.
  
 ####Time Line
 1. Installed express `npm install express`
