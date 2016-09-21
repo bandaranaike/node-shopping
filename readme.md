@@ -34,3 +34,20 @@ This application is designed for a shopping cart.
 9. Installed express session `npm install express-session`
 10. Installed gulp sass `npm install gulp-sass`
 11. Developments of the app.
+
+
+
+
+This is the application I have developed. It's not a final product and it may have some errors. Please follow the instruction listed bellow and install and check it.
+1. Clone from the Github `git clone https://github.com/bandaranaike/node-shopping.git`
+2. Go to the folder `cd node-shopping`
+3. Initialize dependencies `npm install`
+4. Create the database `node_shopping`
+5. Import `node_shopping.sql` located in root dir
+6. Setup a user for this database and update user details with host details in `routes/connection.js` file. Default username is `eranda` and password is `password`
+7. Run the app `npm start`
+8. Navigate to the `https://localhost:3000` using the browser.
+
+You can find the online instructions by navigating  to the `https://github.com/bandaranaike/node-shopping` url
+
+If you have any questions please call and ask me. 
