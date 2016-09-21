@@ -40,3 +40,5 @@ jspm_packages
 
 .gitignore
 .idea/
+.DS_Store
+public/images/
