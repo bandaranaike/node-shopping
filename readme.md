@@ -6,7 +6,7 @@ This application is designed for a shopping cart.
 * Node JS
 * MySQL
 
-###Webtemplate
+###Web framework
 * Express
 
 ###Installation
@@ -15,7 +15,7 @@ This application is designed for a shopping cart.
 3. Initialize dependencies `npm install`
 4. Create the database `node_shopping`
 5. Import `node_shopping.sql` located in root dir
-6. Setup a user for this database and update user details with host in `routes/connection.js` file. Default username is `eranda` and password is `password`
+6. Setup a user for this database and update user details with host details in `routes/connection.js` file. Default username is `eranda` and password is `password`
 7. Run the app `npm start`
 8. Navigate to the `https://localhost:3000` using the browser.
 
