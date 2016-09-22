@@ -17,7 +17,7 @@ This application is designed for a shopping cart.
 5. Import `node_shopping.sql` located in root dir
 6. Setup a user for this database and update user details with host details in `routes/connection.js` file. Default username is `eranda` and password is `password`
 7. Run the app `npm start`
-8. Navigate to the `https://localhost:3000` using the browser.
+8. Navigate to the `http://localhost:3000` using the browser.
 
 ###Known issues
 * Not tested properly. It may have some errors.
